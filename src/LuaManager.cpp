@@ -991,7 +991,7 @@ void LuaHelpers::ParseCommandList( Lua *L, const RString &sCommands, const RStri
 int LuaHelpers::TypeError( Lua *L, int iArgNo, const char *szName )
 {
 	RString sType;
-	luaL_pushtype( L, iArgNo );
+	LuaHelpers::PushType( L, iArgNo );
 	LuaHelpers::Pop( L, sType );
 
 	lua_Debug debug;
@@ -1040,6 +1040,14 @@ void LuaHelpers::PushValueFunc( lua_State *L, int iArgs )
 	lua_pushinteger( L, iArgs );
 	lua_insert( L, iTop );
 	lua_pushcclosure( L, lua_pushvalues, iArgs+1 );
+}
+
+int LuaHelpers::PushType(lua_State *L, int narg) {
+    if(!luaL_callmeta(L, narg, "__type")) {
+        lua_pushstring(L, luaL_typename(L, narg));
+    }
+
+    return 1;
 }
 
 #include "ProductInfo.h"

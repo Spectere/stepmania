@@ -9,7 +9,7 @@
 extern "C"
 {
 #endif
-#include "../extern/lua-5.1/src/lua.h"
+#include "../Lib/lua/lua.h"
 #ifndef _MSC_VER
 }
 #endif

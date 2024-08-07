@@ -10,9 +10,10 @@ namespace avcodec
 {
 	extern "C"
 	{
-		#include <libavformat/avformat.h>
-		#include <libswscale/swscale.h>
-		#include <libavutil/pixdesc.h>
+        #include "../../../Lib/ffmpeg/libavcodec/avcodec.h"
+		#include "../../../Lib/ffmpeg/libavformat/avformat.h"
+		#include "../../../Lib/ffmpeg/libswscale/swscale.h"
+		#include "../../../Lib/ffmpeg/libavutil/pixdesc.h"
 
 		#if LIBAVCODEC_VERSION_MAJOR >= 58
 		#define av_free_packet av_packet_unref

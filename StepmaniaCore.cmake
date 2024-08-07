@@ -8,6 +8,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/extern")
 # Set up helper variables for future configuring.
 set(SM_CMAKE_DIR "${CMAKE_CURRENT_LIST_DIR}/CMake")
 set(SM_EXTERN_DIR "${CMAKE_CURRENT_LIST_DIR}/extern")
+set(SM_LIB_DIR "${CMAKE_CURRENT_LIST_DIR}/Lib")
 set(SM_INSTALLER_DIR "${CMAKE_CURRENT_LIST_DIR}/Installer")
 set(SM_XCODE_DIR "${CMAKE_CURRENT_LIST_DIR}/Xcode")
 set(SM_PROGRAM_DIR "${CMAKE_CURRENT_LIST_DIR}/Program")
@@ -226,7 +227,7 @@ if(WITH_MP3)
     set(HAS_MP3 TRUE)
   else()
     find_package(Mad)
-    if(NOT LIBMAD_FOUND)
+    if(NOT MAD_FOUND)
       message(
         FATAL_ERROR
           "Libmad library not found. If you wish to skip mp3 support, set WITH_MP3 to OFF when configuring."

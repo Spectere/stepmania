@@ -10,7 +10,7 @@ set(VORBIS_NAMES ${VORBIS_NAMES} vorbis libvorbis)
 find_library(VORBIS_LIBRARY NAMES ${VORBIS_NAMES} PATH)
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(VORBIS
+find_package_handle_standard_args(Vorbis
                                   DEFAULT_MSG
                                   VORBIS_LIBRARY
                                   VORBIS_INCLUDE_DIR)

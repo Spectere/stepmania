@@ -10,6 +10,6 @@ set(OGG_NAMES ${OGG_NAMES} ogg libogg)
 find_library(OGG_LIBRARY NAMES ${OGG_NAMES} PATH)
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(OGG DEFAULT_MSG OGG_LIBRARY OGG_INCLUDE_DIR)
+find_package_handle_standard_args(Ogg DEFAULT_MSG OGG_LIBRARY OGG_INCLUDE_DIR)
 
 mark_as_advanced(OGG_LIBRARY OGG_INCLUDE_DIR)

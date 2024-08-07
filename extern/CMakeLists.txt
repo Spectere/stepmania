@@ -1,8 +1,6 @@
-include(CMakeProject-lua.cmake)
 include(CMakeProject-glew.cmake)
 include(CMakeProject-json.cmake)
 include(CMakeProject-mad.cmake)
-include(CMakeProject-zlib.cmake)
 include(CMakeProject-jpeg.cmake)
 if(WITH_OGG)
   if(WITH_SYSTEM_OGG)

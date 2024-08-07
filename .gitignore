@@ -189,3 +189,6 @@ BuildLog.htm
 *.pc
 *.d
 .vscode/
+
+# CLion/CMake
+build-*/

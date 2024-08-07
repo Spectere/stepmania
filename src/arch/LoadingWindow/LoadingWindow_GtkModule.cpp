@@ -76,7 +76,7 @@ void DeletePixels( guchar *pixels, gpointer data )
 
 GdkPixbuf *MakePixbuf( const RageSurface *pSrc )
 {
-	RageSurface *pSurface = CreateSurface( pSrc->w, pSrc->h, 32,
+	/*RageSurface *pSurface = CreateSurface( pSrc->w, pSrc->h, 32,
 		0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000 );
 	RageSurfaceUtils::Blit( pSrc, pSurface , -1, -1 );
 
@@ -87,7 +87,8 @@ GdkPixbuf *MakePixbuf( const RageSurface *pSrc )
 		pSurface->pixels_owned = false;
 
 	delete pSurface;
-	return pBuf;
+	return pBuf;*/
+    return nullptr;
 }
 
 extern "C" void SetIcon( const RageSurface *pSrcImg )

@@ -12,9 +12,9 @@ class LuaReference;
 extern "C"
 {
 #endif
-#include "../extern/lua-5.1/src/lua.h"
-#include "../extern/lua-5.1/src/lualib.h"
-#include "../extern/lua-5.1/src/lauxlib.h"
+#include "../Lib/lua/lua.h"
+#include "../Lib/lua/lualib.h"
+#include "../Lib/lua/lauxlib.h"
 #ifndef _MSC_VER
 }
 #endif
@@ -156,6 +156,8 @@ namespace LuaHelpers
 			lua_rawseti( L, -2, i+1 );
 		}
 	}
+
+    int PushType(lua_State *L, int narg);  // Replaces luaL_pushtype()
 
 	int TypeError( Lua *L, int narg, const char *tname );
 	inline int AbsIndex( Lua *L, int i ) { if( i > 0 || i <= LUA_REGISTRYINDEX ) return i; return lua_gettop( L ) + i + 1; }

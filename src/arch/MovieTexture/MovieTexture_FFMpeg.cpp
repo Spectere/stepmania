@@ -273,7 +273,7 @@ int MovieDecoder_FFMpeg::DecodePacket( float fTargetTime )
 		bool bSkipThisFrame =
 			fTargetTime != -1 &&
 			GetTimestamp() + GetFrameDuration() < fTargetTime &&
-			(m_pStreamCodec->frame_number % 2) == 0;
+			(m_pStreamCodec->frame_num % 2) == 0;
 
 		int iGotFrame;
 		int len;
@@ -404,11 +404,6 @@ void MovieTexture_FFMpeg::RegisterProtocols()
 	if( Done )
 		return;
 	Done = true;
-
-#if !FF_API_NEXT
-	avcodec::avcodec_register_all();
-	avcodec::av_register_all();
-#endif
 }
 
 static int AVIORageFile_ReadPacket( void *opaque, uint8_t *buf, int buf_size )
@@ -508,7 +503,7 @@ RString MovieDecoder_FFMpeg::OpenCodec()
 	if( m_pStreamCodec->codec )
 		avcodec::avcodec_close( m_pStreamCodec );
 
-	avcodec::AVCodec *pCodec = avcodec::avcodec_find_decoder( m_pStreamCodec->codec_id );
+	const avcodec::AVCodec *pCodec = avcodec::avcodec_find_decoder( m_pStreamCodec->codec_id );
 	if( pCodec == nullptr )
 		return ssprintf( "Couldn't find decoder %i", m_pStreamCodec->codec_id );
 

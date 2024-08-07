@@ -8,7 +8,7 @@ set(VORBISFILE_NAMES ${VORBISFILE_NAMES} vorbisfile libvorbisfile)
 find_library(VORBISFILE_LIBRARY NAMES ${VORBISFILE_NAMES} PATH)
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(VORBISFILE
+find_package_handle_standard_args(VorbisFile
                                   DEFAULT_MSG
                                   VORBISFILE_LIBRARY
                                   VORBISFILE_INCLUDE_DIR)

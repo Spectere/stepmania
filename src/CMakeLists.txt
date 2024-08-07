@@ -380,16 +380,16 @@ else() # Linux
   if(${HAS_PTHREAD})
     sm_add_compile_definition("${SM_EXE_NAME}" HAVE_LIBPTHREAD)
 
-    message("Host processor is ${CMAKE_SYSTEM_PROCESSOR}")
+    message("CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR}")
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
-      message("Host processor is 64bit X86")
+      message("Host processor is 64-bit x86")
       sm_add_compile_definition("${SM_EXE_NAME}" CPU_X86_64)
     elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "x86"
            OR CMAKE_SYSTEM_PROCESSOR MATCHES "i686")
-      message("Host processor is 32bit X86")
+      message("Host processor is 32-bit x86")
       sm_add_compile_definition("${SM_EXE_NAME}" CPU_X86)
     elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
-      message("Host processor is 64bit ARM")
+      message("Host processor is 64-bit ARM")
       sm_add_compile_definition("${SM_EXE_NAME}" CPU_AARCH64)
     else()
       message("Unrecognized host processor type")
@@ -426,7 +426,7 @@ endif()
 
 set_property(TARGET "${SM_EXE_NAME}" PROPERTY FOLDER "Internal Libraries")
 
-list(APPEND SMDATA_LINK_LIB "lua-5.1")
+list(APPEND SMDATA_LINK_LIB "lua")
 include(../extern/CMakeProject-mmmagic.cmake)
 
 if(HAS_MP3)
@@ -508,7 +508,8 @@ if(WIN32)
               "${LIB_SWSCALE}"
               "${LIB_AVCODEC}"
               "${LIB_AVFORMAT}"
-              "${LIB_AVUTIL}")
+              "${LIB_AVUTIL}"
+              "lzma")  # TODO: Pull in the lzma lib as a submodule.
 
   list(APPEND SMDATA_LINK_LIB
               "dbghelp.lib"
@@ -559,7 +560,8 @@ elseif(APPLE)
                 "${SM_FFMPEG_ROOT}/libavformat/libavformat.a"
                 "${SM_FFMPEG_ROOT}/libavcodec/libavcodec.a"
                 "${SM_FFMPEG_ROOT}/libswscale/libswscale.a"
-                "${SM_FFMPEG_ROOT}/libavutil/libavutil.a")
+                "${SM_FFMPEG_ROOT}/libavutil/libavutil.a"
+                "lzma")  # TODO: Pull in the lzma lib as a submodule.
   endif()
 else() # Unix / Linux TODO: Remember to find and locate the zip archive files.
   if(HAS_FFMPEG)
@@ -574,7 +576,10 @@ else() # Unix / Linux TODO: Remember to find and locate the zip archive files.
                   "${SM_FFMPEG_ROOT}/libavformat/libavformat.a"
                   "${SM_FFMPEG_ROOT}/libavcodec/libavcodec.a"
                   "${SM_FFMPEG_ROOT}/libswscale/libswscale.a"
-                  "${SM_FFMPEG_ROOT}/libavutil/libavutil.a")
+                  "${SM_FFMPEG_ROOT}/libavutil/libavutil.a"
+                  "drm"
+                  "lzma"
+                  "vdpau")  # TODO: Pull in the lzma lib as a submodule.
     endif()
 
     if(NOT WITH_SYSTEM_ZLIB)
@@ -583,7 +588,10 @@ else() # Unix / Linux TODO: Remember to find and locate the zip archive files.
     endif()
 
     if(VA_FOUND)
-      list(APPEND SMDATA_LINK_LIB ${VA_LIBRARY})
+      list(APPEND SMDATA_LINK_LIB
+                  ${VA_LIBRARY}
+                  "va-drm"
+                  "va-x11")  # TODO: This feels really hacky...
     endif()
   endif()
 
@@ -635,7 +643,7 @@ else() # Unix / Linux TODO: Remember to find and locate the zip archive files.
     list(APPEND SMDATA_LINK_LIB ${PCRE_LIBRARY})
   endif()
   
-  if(LIBXTST_FOUND)
+  if(XTST_FOUND)
     list(APPEND SMDATA_LINK_LIB ${LIBXTST_LIBRARY})
   endif()
 
