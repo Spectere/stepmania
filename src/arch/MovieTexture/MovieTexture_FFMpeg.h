@@ -82,7 +82,7 @@ private:
 	avcodec::AVFrame *m_Frame;
 	avcodec::PixelFormat m_AVTexfmt; /* PixelFormat of output surface */
 	avcodec::SwsContext *m_swsctx;
-	avcodec::AVCodecContext *m_pStreamCodec;
+	avcodec::AVCodecContext *m_pStreamCodec = nullptr;
 
 	avcodec::AVFormatContext *m_fctx;
 	float m_fTimestamp;

@@ -409,6 +409,9 @@ void MovieTexture_FFMpeg::RegisterProtocols()
 static int AVIORageFile_ReadPacket( void *opaque, uint8_t *buf, int buf_size )
 {
     RageFile *f = (RageFile *)opaque;
+    if(f->AtEOF()) {
+        return AVERROR_EOF;
+    }
     return f->Read( buf, buf_size );
 }
 
@@ -500,8 +503,6 @@ RString MovieDecoder_FFMpeg::OpenCodec()
 	m_fLastFrame = 0;
 
 	ASSERT( m_pStream != nullptr );
-	if( m_pStreamCodec->codec )
-		avcodec::avcodec_close( m_pStreamCodec );
 
 	const avcodec::AVCodec *pCodec = avcodec::avcodec_find_decoder( m_pStreamCodec->codec_id );
 	if( pCodec == nullptr )
@@ -530,7 +531,7 @@ void MovieDecoder_FFMpeg::Close()
 {
 	if( m_pStream && m_pStreamCodec->codec )
 	{
-		avcodec::avcodec_close( m_pStreamCodec );
+		avcodec::avcodec_free_context( &m_pStreamCodec );
 		m_pStream = nullptr;
 	}
 
