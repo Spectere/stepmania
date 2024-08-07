@@ -1,9 +1,9 @@
 [submodule "Lib/ffmpeg"]
 	path = Lib/ffmpeg
 	url = git@github.com:FFmpeg/FFmpeg.git
-[submodule "Lib/lua"]
-	path = Lib/lua
-	url = git@github.com:lua/lua.git
 [submodule "Lib/zlib"]
 	path = Lib/zlib
 	url = git@github.com:madler/zlib.git
+[submodule "Lib/libpng"]
+	path = Lib/libpng
+	url = git@github.com:pnggroup/libpng
